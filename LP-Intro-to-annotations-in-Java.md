@@ -16,7 +16,7 @@ from Baeldung.
 
 #### Resources
   * Slides
-  * CustomAnnotations - GitHub project
+  * [CustomAnnotations - GitHub project](https://github.com/rlwing/CustomAnnotations-Example)
   
 #### Instructions
   1. Share objectives for the lesson
