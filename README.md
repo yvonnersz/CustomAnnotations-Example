@@ -1,6 +1,6 @@
 ## Create a simple custom annotation
 
-####Adapted from Baeldung "[Creating a Custom Annotation in Java](https://www.baeldung.com/java-custom-annotation)"
+#### Adapted from Baeldung "[Creating a Custom Annotation in Java](https://www.baeldung.com/java-custom-annotation)"
 
 1. Create 3 custom annotations
    * `@JsonSerializable` - Indicates that class is serializable to json
