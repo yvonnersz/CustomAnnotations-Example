@@ -15,7 +15,7 @@ annotations in Java, how they are used, and then walk through a custom annotatio
 from Baeldung.
 
 #### Resources
-  * Slides
+  * [Slides](https://docs.google.com/presentation/d/1SfWCpTiBhUP5fmGnPyHlVSZS3_9VUTVdvS8HrfWj5pM/edit?usp=sharing)
   * [CustomAnnotations - GitHub project](https://github.com/rlwing/CustomAnnotations-Example)
   
 #### Instructions
