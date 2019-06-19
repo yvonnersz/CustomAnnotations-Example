@@ -1,4 +1,4 @@
-# IntroTo Annotations in Java
+# Intro To Annotations in Java
 
 ### Objectives
 At the end of this lesson, students will be able to...
