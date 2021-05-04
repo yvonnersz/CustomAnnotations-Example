@@ -9,24 +9,24 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ObjectToJsonConverter {
+
     public String convertToJson(Object object) throws JsonSerializationException {
         try {
-
             checkIfSerializable(object);
             initializeObject(object);
             return getJsonString(object);
-
         } catch (Exception e) {
             throw new JsonSerializationException(e.getMessage());
         }
     }
 
-    private void checkIfSerializable(Object object) {
+    private void checkIfSerializable(Object object) { // Checks to see if object is null.
         if (Objects.isNull(object)) {
             throw new JsonSerializationException("Can't serialize a null object");
         }
 
         Class<?> clazz = object.getClass();
+
         if (!clazz.isAnnotationPresent(JsonSerializable.class)) {
             throw new JsonSerializationException("The class " + clazz.getSimpleName() + " is not annotated with JsonSerializable");
         }
@@ -34,9 +34,10 @@ public class ObjectToJsonConverter {
 
     private void initializeObject(Object object) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class<?> clazz = object.getClass();
+
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Init.class)) {
-                method.setAccessible(true);
+                method.setAccessible(true); // Allows us to execute the private initNames() method.
                 method.invoke(object);
             }
         }
@@ -44,9 +45,12 @@ public class ObjectToJsonConverter {
 
     private String getJsonString(Object object) throws IllegalArgumentException, IllegalAccessException {
         Class<?> clazz = object.getClass();
+
         Map<String, String> jsonElementsMap = new HashMap<>();
+
         for (Field field : clazz.getDeclaredFields()) {
-            field.setAccessible(true);
+            field.setAccessible(true); // Person object's field are private.
+
             if (field.isAnnotationPresent(JsonElement.class)) {
                 jsonElementsMap.put(getKey(field), (String) field.get(object));
             }
@@ -56,12 +60,11 @@ public class ObjectToJsonConverter {
                 .stream()
                 .map(entry -> "\"" + entry.getKey() + "\":\"" + entry.getValue() + "\"")
                 .collect(Collectors.joining(","));
-        return "{" + jsonString + "}";
+        return "{" +jsonString + "}";
     }
 
     private String getKey(Field field) {
-        String value = field.getAnnotation(JsonElement.class)
-                .key();
+        String value = field.getAnnotation(JsonElement.class).key();
         return value.isEmpty() ? field.getName() : value;
     }
 }
